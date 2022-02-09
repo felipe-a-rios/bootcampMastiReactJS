@@ -1,0 +1,91 @@
+a {
+  text-decoration: none;
+  color: #acb1ba;
+  transition: 0.3s;
+}
+a:hover {
+  color: #2f71fd;
+}
+button {
+  font-family: "Poppins", sans-serif;
+  background: transparent;
+  border: none;
+  color: #2f71fd;
+  font-weight: 500;
+  transition: 0.3s;
+}
+button:hover {
+  filter: brightness(1.2);
+  cursor: pointer;
+}
+.table {
+  background: #333333;
+  width: 75%;
+}
+.footer {
+  background: #333333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 80px;
+}
+.linhaInfernal {
+  overflow: hidden;
+  color: gray;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+.logoBox {
+  display: flex;
+  justify-content: flex-start;
+}
+.logo {
+  width: 120px;
+  height: 40px;
+  transition: 0.3s;
+}
+.logo:hover {
+  filter: contrast(0.6);
+}
+.linkBox {
+  display: flex;
+  gap: 20px;
+  font-size: 12px;
+}
+.linkContent {
+  display: flex;
+  justify-content: flex-end;
+}
+.textBox {
+  display: flex;
+  justify-content: flex-start;
+}
+.iconsBox {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.textBox {
+  color: #b3b3b3;
+  font-size: 12px;
+}
+
+.textBox a {
+  color: #2f71fd;
+  transition: 0.3s;
+}
+.textBox a:hover {
+  filter: brightness(1.3) !important;
+}
+.iconsBox a {
+  color: #2f71fd;
+  transition: 0.3s;
+}
+.iconsBox img {
+  width: 22px;
+  height: 22px;
+}
+.iconsBox a:hover {
+  filter: brightness(1.3) !important;
+}

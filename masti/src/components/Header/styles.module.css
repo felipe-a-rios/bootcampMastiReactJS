@@ -1,0 +1,66 @@
+.header {
+  background: #333333;
+
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+}
+.header a {
+  text-decoration: none;
+  color: #fff;
+  height: 20px;
+}
+.header a:hover {
+  color: #2f71fd;
+  transition-duration: 0.3s;
+}
+.imgBox {
+  margin-top: 20px;
+  margin-left: 200px;
+
+  height: 40px;
+}
+
+.logo {
+  width: 120px;
+  height: 40px;
+  transition-duration: 0.3s;
+}
+.logo:hover {
+  filter: brightness(1.2);
+}
+.linkBox {
+  display: flex;
+
+  gap: 12px;
+  margin-top: 30px;
+  margin-right: 200px;
+}
+.linkBox a {
+  font-size: 14px;
+}
+.bar {
+  width: 4px;
+  height: 40px;
+  margin-top: -10px;
+  background: #ffffff;
+}
+
+.header .mainButton:hover {
+  transition-duration: 0.3s;
+  color: #fff;
+  background: #2f71fd;
+  border-color: #2f71fd;
+}
+
+.mainButton {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  background: transparent;
+  color: #fff;
+  padding: 5px 30px;
+  text-align: center;
+  cursor: pointer;
+  height: 40px;
+  margin-top: -10px;
+}

@@ -1,0 +1,647 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "React Bootcamp Mock API",
+    "description": "Esta é uma API de testes para o desenvolvimento da plataforma do bootcamp de React\n",
+    "contact": {
+      "email": "vviotto@masti.com.br"
+    },
+    "version": "2.0.0"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Operações relacionadas ao usuário"
+    },
+    {
+      "name": "Courses",
+      "description": "Operações relacionadas aos cursos"
+    }
+  ],
+  "paths": {
+    "/users/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Faça login no sistema",
+        "operationId": "userLogin",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserLogin"
+        },
+        "responses": {
+          "200": {
+            "description": "token de autenticação",
+            "content": {
+              "plain/text": {
+                "schema": {
+                  "type": "string",
+                  "example": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkZ1bGFubyIsImlhdCI6MTU3NjE2MTM0OH0.IVYjqGuPMMF3rGeokzEVHqUQ6vs6o12ALUpPiToQIzI"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Email ou Senha inválios"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/users/signUp": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Crie uma conta no sistema",
+        "operationId": "userSignup",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UserSignup"
+        },
+        "responses": {
+          "201": {
+            "description": "Objeto com os dados do novo usuário criado, mais token de autenticação",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSignupResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/users/me": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Busque detalhes do perfil do usuário, junto com os cursos comprados pelo mesmo",
+        "operationId": "profile",
+        "responses": {
+          "200": {
+            "description": "Objeto com os dados do usuário, mais os cursos que ele possui",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Profile"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ]
+      }
+    },
+    "/users/me/courses": {
+      "post": {
+        "tags": ["Users", "Courses"],
+        "summary": "Endpoint para fazer a compra de cursos por um usuário",
+        "operationId": "courseCheckout",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/CourseCheckout"
+        },
+        "responses": {
+          "201": {
+            "description": "Lista com os dados dos cursos que foram comprados pelo usuário",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CourseCheckoutResponse"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Usuário já possui algum dos cursos que estão no carrinho de compras"
+          },
+          "422": {
+            "description": "Um dos IDs dos cursos enviados não existe, ou foi enviado IDs duplicados em uma mesma compra"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ]
+      }
+    },
+    "/users/me/courses/{id}/classes": {
+      "get": {
+        "tags": ["Users", "Courses"],
+        "summary": "Busque as aulas de um curso do usuário",
+        "operationId": "courseClasses",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do curso a ser buscado",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de classes de um curso do usuário",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Class"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        },
+        "security": [
+          {
+            "ApiKey": []
+          }
+        ]
+      }
+    },
+    "/courses": {
+      "get": {
+        "tags": ["Courses"],
+        "summary": "Busca lista de cursos",
+        "operationId": "courseList",
+        "responses": {
+          "200": {
+            "description": "Lista de Cursos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Course"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    },
+    "/courses/{id}": {
+      "get": {
+        "tags": ["Courses"],
+        "summary": "Busca detalhes de um curso específico",
+        "operationId": "course",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do curso a ser buscado",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "example": 1
+            }
+          },
+          {
+            "name": "_embed",
+            "in": "query",
+            "description": "Parâmetro necessário para incluir os dados das aulas na resposta",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": ["classes"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detalhes de um curso e suas aulas",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseWithClass"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Não Encontrado"
+          },
+          "500": {
+            "description": "Erro interno do servidor"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserLogin": {
+        "required": ["password", "username"],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "teste@teste.com"
+          },
+          "pasword": {
+            "type": "string",
+            "example": "123456"
+          }
+        }
+      },
+      "UserSignup": {
+        "required": ["birthdate", "cpf", "email", "name", "password", "surname"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Fulano"
+          },
+          "surname": {
+            "type": "string",
+            "example": "Da Silva"
+          },
+          "birthdate": {
+            "type": "string",
+            "example": "03/11/1983"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "022.784.240-50"
+          },
+          "email": {
+            "type": "string",
+            "example": "teste@teste.com"
+          },
+          "pasword": {
+            "type": "string",
+            "example": "123456"
+          }
+        }
+      },
+      "UserSignupResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Fulano"
+          },
+          "surname": {
+            "type": "string",
+            "example": "Da Silva"
+          },
+          "birthdate": {
+            "type": "string",
+            "example": "03/11/1983"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "022.784.240-50"
+          },
+          "email": {
+            "type": "string",
+            "example": "teste@teste.com"
+          },
+          "accessToken": {
+            "type": "string",
+            "example": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkZ1bGFubyIsImlhdCI6MTU3NjE2MTM0OH0.IVYjqGuPMMF3rGeokzEVHqUQ6vs6o12ALUpPiToQIzI"
+          }
+        }
+      },
+      "Course": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "React"
+          },
+          "description": {
+            "type": "string",
+            "example": "Aprenda React na prática!"
+          },
+          "requirements": {
+            "type": "string",
+            "example": "Conhecimentos de html, css e javascript"
+          },
+          "instructor": {
+            "type": "string",
+            "example": "Vinicius Viotto Sponchiado"
+          },
+          "price": {
+            "type": "string",
+            "example": "19,99"
+          },
+          "thumbnail": {
+            "type": "string",
+            "example": "curso1.png"
+          }
+        }
+      },
+      "CourseWithClass": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "React"
+          },
+          "description": {
+            "type": "string",
+            "example": "Aprenda React na prática!"
+          },
+          "requirements": {
+            "type": "string",
+            "example": "Conhecimentos de html, css e javascript"
+          },
+          "instructor": {
+            "type": "string",
+            "example": "Vinicius Viotto Sponchiado"
+          },
+          "price": {
+            "type": "string",
+            "example": "19,99"
+          },
+          "thumbnail": {
+            "type": "string",
+            "example": "curso1.png"
+          },
+          "classes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Class"
+            }
+          }
+        }
+      },
+      "Class": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "Introdução!"
+          },
+          "duration": {
+            "type": "string",
+            "example": "15:27"
+          },
+          "url": {
+            "type": "string",
+            "example": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
+          },
+          "courseID": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      },
+      "CourseCheckout": {
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      },
+      "CourseCheckoutResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "userId": {
+            "type": "integer",
+            "example": 1
+          },
+          "courseId": {
+            "type": "integer",
+            "example": 1
+          }
+        }
+      },
+      "Profile": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Fulano"
+          },
+          "surname": {
+            "type": "string",
+            "example": "Da Silva"
+          },
+          "birthdate": {
+            "type": "string",
+            "example": "03/11/1983"
+          },
+          "cpf": {
+            "type": "string",
+            "example": "022.784.240-50"
+          },
+          "email": {
+            "type": "string",
+            "example": "teste@teste.com"
+          },
+          "courses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Course"
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "UserLogin": {
+        "description": "token de autenticação",
+        "content": {
+          "plain/text": {
+            "schema": {
+              "type": "string",
+              "example": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkZ1bGFubyIsImlhdCI6MTU3NjE2MTM0OH0.IVYjqGuPMMF3rGeokzEVHqUQ6vs6o12ALUpPiToQIzI"
+            }
+          }
+        }
+      },
+      "UserSignup": {
+        "description": "Objeto com os dados do novo usuário criado, mais token de autenticação",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserSignupResponse"
+            }
+          }
+        }
+      },
+      "GetCourses": {
+        "description": "Lista de Cursos",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Course"
+              }
+            }
+          }
+        }
+      },
+      "GetCourse": {
+        "description": "Detalhes de um curso e suas aulas",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/CourseWithClass"
+            }
+          }
+        }
+      },
+      "CourseCheckout": {
+        "description": "Lista com os dados dos cursos que foram comprados pelo usuário",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CourseCheckoutResponse"
+              }
+            }
+          }
+        }
+      },
+      "Profile": {
+        "description": "Objeto com os dados do usuário, mais os cursos que ele possui",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Profile"
+            }
+          }
+        }
+      },
+      "CourseClasses": {
+        "description": "Lista de classes de um curso do usuário",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Class"
+              }
+            }
+          }
+        }
+      },
+      "unauthorized": {
+        "description": "Email ou Senha inválios"
+      },
+      "notFound": {
+        "description": "Não Encontrado"
+      },
+      "internalServerError": {
+        "description": "Erro interno do servidor"
+      }
+    },
+    "requestBodies": {
+      "UserLogin": {
+        "description": "Objeto com email e senha para realizar o login",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserLogin"
+            }
+          }
+        },
+        "required": true
+      },
+      "UserSignup": {
+        "description": "Objeto com os dados do usuário a ser criado",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UserSignup"
+            }
+          }
+        },
+        "required": true
+      },
+      "CourseCheckout": {
+        "description": "Objeto com a lista de cursos comprados pelo usuário",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CourseCheckout"
+              }
+            }
+          }
+        },
+        "required": true
+      }
+    },
+    "securitySchemes": {
+      "ApiKey": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}

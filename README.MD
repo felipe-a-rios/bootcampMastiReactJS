@@ -5,7 +5,7 @@ Projeto do Boootcamp da Masti de ReactJS. <br/>
 <br>
 
 <p align="center">
-  <img alt="protótipo do site" src="./github/preview.jpg" width="100%">
+  <img alt="protótipo do site" src="./web/src/assets/preview.jpg" width="100%">
 </p>
 
 ## 🚀 Tecnologias
@@ -19,7 +19,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-O site é uma plataforma de cursos de tecnologia.
+O site é uma plataforma de cursos de tecnologia.<br>para rodá-lo basta digitar o comando npm run dev
 
 ## 🔖 Layout
 

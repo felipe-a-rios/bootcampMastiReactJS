@@ -20,7 +20,7 @@ export function Home() {
               A maior seleção de cursos do mundo. Escolha entre mais de 100.000
               cursos em vídeo online a partir de <b>R$ 19,90</b>
             </span>
-            <button className="bg-lightGreen block mt-16 w-64 p-4 rounded-md text-blue font-semibold">
+            <button className="bg-lightGreen block mt-12 w-64 p-4 rounded-md text-blue font-semibold">
               Cadastre-se
             </button>
           </div>

@@ -1,3 +1,10 @@
+import * as Separator from "@radix-ui/react-separator";
 export function BlueLine() {
-  return <div className="w-full h-0.5 bg-blue"></div>;
+  return (
+    <Separator.Root
+      className="bg-blue h-[0.25rem] w-full"
+      decorative
+      orientation="horizontal"
+    />
+  );
 }

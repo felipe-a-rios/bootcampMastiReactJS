@@ -9,10 +9,14 @@ module.exports = {
       carbon: {
         900: "#333",
         800: "#828282",
-        700: "#BDBDBD",
-        600: "#E0E0E0",
-        500: "#F2F2F2",
+        500: "#BDBDBD",
+        300: "#E0E0E0",
+        200: "#F2F2F2",
         100: "#fff",
+      },
+      gray: {
+        footer: "rgba(51, 51, 51, 1)",
+        text: "#ACB1BA",
       },
     },
     fontFamily: {

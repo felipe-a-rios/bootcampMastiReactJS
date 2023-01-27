@@ -9,7 +9,7 @@ type headerProps = {
 export function Header({ linkText, buttonText, linkText2 }: headerProps) {
   return (
     <>
-      <header className="flex items-center justify-between bg-carbon-900 w-full text-center font-bold p-3">
+      <header className="flex items-center justify-between bg-carbon-900 w-full text-center font-medium p-3 text-sm">
         <a href="https://masti.com.br/" className=" pl-60">
           <img src={logoImg} className="w-32 h-10" alt="logo Masti" />
         </a>

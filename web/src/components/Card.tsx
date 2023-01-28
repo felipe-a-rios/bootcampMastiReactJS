@@ -20,12 +20,15 @@ export function Card({
   thumbnail,
 }: ContentProps) {
   return (
-    <div className="rounded-lg bg-white shadow-md w-fit">
-      <img alt="imagem do curso" src={curso} />
-      <p className="text-blue">{title}</p>
-      <p className="text-blue">{description}</p>
-      <p className="text-carbon-900"> {instructor}</p>
-      <p className="font-bold text-black">R$ {price}</p>
+    <div className=" rounded-lg bg-white shadow-lg overflow-hidden text-base mb-10 mr-4">
+      <img alt="imagem do curso" src={curso} className="" />
+      <div className="p-3">
+        {" "}
+        <p className="text-blue font-bold">{title}</p>
+        <p className="text-blue font-medium">{description}</p>
+        <p className="text-carbon-900"> {instructor}</p>
+        <p className="font-bold text-carbon-900 text-end">R$ {price}</p>
+      </div>
     </div>
   );
 }

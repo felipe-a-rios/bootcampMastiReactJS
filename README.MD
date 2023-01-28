@@ -19,7 +19,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-O site é uma plataforma de cursos de tecnologia.<br>para rodá-lo basta digitar o comando npm run dev
+O site é uma plataforma de cursos de tecnologia.<br>para rodá-lo basta digitar o comando npm run dev na pasta web/ e npm start na pasta server/
 
 ## 🔖 Layout
 

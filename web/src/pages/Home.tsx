@@ -9,7 +9,7 @@ import CountDownTimer from "../components/Timer";
 export function Home() {
   return (
     <>
-      <Header buttonText="Entrar" linkText2="Cadastre-se" linkText="Cursos" />
+      <Header linkText2="Cadastre-se" linkText="Cursos" />
 
       <main className="">
         <div className="flex flex-1 relative font-main content-around items-center pl-60 text-carbon-900 ">

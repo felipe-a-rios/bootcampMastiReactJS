@@ -82,6 +82,15 @@
       "instructor": "Instrutor 8",
       "price": "99,90",
       "thumbnail": "curso4.png"
+    },
+    {
+      "id": 9,
+      "title": "Curso 9",
+      "description": "Descrição 9",
+      "requirements": "Requerimentos 9",
+      "instructor": "Instrutor 9",
+      "price": "99,90",
+      "thumbnail": "curso1.png"
     }
   ],
   "classes": [

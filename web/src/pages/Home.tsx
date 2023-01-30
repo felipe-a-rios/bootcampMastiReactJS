@@ -1,12 +1,30 @@
 import banner from "../assets/img_banner.png";
+import { useEffect, useState } from "react";
 import clockImg from "../assets/relogio.svg";
-
 import { Card } from "../components/Card";
 import { FooterTable } from "../components/FooterTable";
 import { Header } from "../components/Header";
 import CountDownTimer from "../components/Timer";
+import { api } from "../lib/axios";
 
-export function Home() {
+export interface Course {
+  id: number;
+  title: string;
+  description: string;
+  requirements: string;
+  instructor: string;
+  price: string;
+  thumbnail: string;
+}
+
+export function Home(props: Course) {
+  const [courses, setCourses] = useState<Course[]>([]);
+  useEffect(() => {
+    api.get("/courses").then((res) => {
+      setCourses(res.data);
+      console.log(res.data);
+    });
+  }, []);
   return (
     <>
       <Header linkText2="Cadastre-se" linkText="Cursos" />
@@ -57,60 +75,18 @@ export function Home() {
         <section className="pl-60 pt-12 pr-48">
           <p className="text-carbon-900 font-semibold pb-12">Nossos Cursos</p>
           <div className="flex flex-wrap gap-3 pb-[9.375rem]">
-            <Card
-              description="teste"
-              instructor="yuri"
-              id={1}
-              price="200"
-              requirements="fumar"
-              thumbnail="curso1.png"
-              title="Design thinking"
-            />
-            <Card
-              description="teste"
-              instructor="yuri"
-              id={1}
-              price="200"
-              requirements="fumar"
-              thumbnail="curso1.png"
-              title="Design thinking"
-            />
-            <Card
-              description="teste"
-              instructor="yuri"
-              id={1}
-              price="200"
-              requirements="fumar"
-              thumbnail="curso1.png"
-              title="Design thinking"
-            />
-            <Card
-              description="teste"
-              instructor="yuri"
-              id={1}
-              price="200"
-              requirements="fumar"
-              thumbnail="curso1.png"
-              title="Design thinking"
-            />
-            <Card
-              description="teste"
-              instructor="yuri"
-              id={1}
-              price="200"
-              requirements="fumar"
-              thumbnail="curso1.png"
-              title="Design thinking"
-            />
-            <Card
-              description="teste"
-              instructor="yuri"
-              id={1}
-              price="200"
-              requirements="fumar"
-              thumbnail="curso1.png"
-              title="Design thinking"
-            />
+            {courses.map((course) => (
+              <Card
+                id={course.id}
+                key={course.id}
+                description={course.description}
+                instructor={course.instructor}
+                price={course.price}
+                requirements={course.requirements}
+                thumbnail={course.thumbnail}
+                title={course.title}
+              />
+            ))}
           </div>
         </section>
         <FooterTable />

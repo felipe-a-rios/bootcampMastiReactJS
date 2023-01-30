@@ -7,7 +7,7 @@ export function DialogComponent({ buttonText }: headerProps) {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <button className="border-2 text-carbon-100 py-2 px-7 rounded-md border-carbon-100 hover:border-blue hover:text-blue duration-300">
+        <button className="border-4 text-carbon-100 py-2 px-7 rounded-md border-carbon-100 hover:border-blue hover:text-blue duration-300">
           {buttonText}
         </button>
       </Dialog.Trigger>

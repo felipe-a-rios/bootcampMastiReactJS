@@ -17,7 +17,7 @@ export function Header({ linkText, buttonText, linkText2 }: headerProps) {
           </a>
         </div>
         <nav className="flex items-center justify-around  gap-3 text-carbon-100 pr-60">
-          <a className="hover:brightness-75 duration-300" href="/">
+          <a className="hover:text-blue duration-300" href="/">
             {linkText}
           </a>
           <Separator.Root
@@ -25,7 +25,7 @@ export function Header({ linkText, buttonText, linkText2 }: headerProps) {
             decorative
             orientation="vertical"
           />
-          <a className="hover:brightness-75 duration-300" href="/">
+          <a className="hover:text-blue duration-300" href="/">
             {linkText2}
           </a>{" "}
           <DialogComponent buttonText="Entrar" />

@@ -28,7 +28,7 @@ export function Header({ linkText, buttonText, linkText2 }: headerProps) {
           <a className="hover:text-blue duration-300" href="/">
             {linkText2}
           </a>{" "}
-          <DialogComponent buttonText="Entrar" />
+          <DialogComponent buttonText={buttonText} />
         </nav>
       </header>
       <BlueLine />

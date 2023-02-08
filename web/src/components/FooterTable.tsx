@@ -8,7 +8,10 @@ export function FooterTable() {
     <>
       <BlueLine />
 
-      <footer className="bg-gray-footer text-gray-text p-4 pl-60 pr-60 ">
+      <footer
+        className="bg-gray-footer text-gray-text p-4 pl-60 pr-60"
+        id="footer"
+      >
         <div className="container mx-auto flex justify-between items-center pt-36 font-normal gap-3 pb-36 ">
           <a className="hover:brightness-75 duration-300" href="">
             <img className="w-32 h-10" src={logoWhite} alt="Logo masti" />

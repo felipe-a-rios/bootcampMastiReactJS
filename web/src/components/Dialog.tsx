@@ -56,6 +56,7 @@ export function DialogComponent({ buttonText }: headerProps) {
             <button
               className="rounded-full inline-flex items-center justify-center absolute top-8 right-8 duration-300 text-carbon-500 hover:shadow-md hover:bg-carbon-800/20 hover:text-carbon-800"
               aria-label="Fechar"
+              name="Fechar"
             >
               <CloseCircleOutlined />
             </button>

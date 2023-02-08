@@ -19,11 +19,13 @@ export interface Course {
 
 export function Home(props: Course) {
   const [courses, setCourses] = useState<Course[]>([]);
+  const fetchCourses = async () => {
+    const res = await api.get("/courses");
+    setCourses(res.data);
+  };
+
   useEffect(() => {
-    api.get("/courses").then((res) => {
-      setCourses(res.data);
-      console.log(res.data);
-    });
+    fetchCourses();
   }, []);
   return (
     <>

@@ -16,6 +16,8 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - TypeScript
 - Tailwind CSS, RaidxUI
 - Figma
+- Jest
+- Axios
 
 ## 💻 Projeto
 
